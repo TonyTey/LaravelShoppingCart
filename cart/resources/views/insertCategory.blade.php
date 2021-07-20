@@ -6,12 +6,8 @@
     <div class="col-sm-6">
         <br><br>
         <h3>Create New Category</h3>
-        <form method="POST", action="{{ route('addCategory') }}">
+        <form method="POST", action="{{route('addCategory')}}">
             @CSRF
-            <div class="form-group">
-                <label for="Category ID">Category ID</label>
-                <input type="text" class="form-control" id="categoryID" name="categoryID">
-            </div>
             <div class="form-group">
                 <label for="Category name">Name</label>
                 <input type="text" class="form-control" id="categoryName" name="categoryName">
