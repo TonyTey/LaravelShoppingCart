@@ -18,19 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products/', function () {
-    return view('products');
-});
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'viewAll'])->name('Product');
 
-Route::get('/insertCategory/', function () {
+Route::get('/insertCategory', function () {
     return view('insertCategory');
 });
 
-Route::get('/showCategory/', function () {
-    return view('showCategory');
-});
-
-Route::get('/insertProduct/', function() {
+Route::get('/insertProduct', function() {
     return view("insertProduct");
 });
 
@@ -39,6 +33,8 @@ Route::get('/viewCategory', [App\Http\Controllers\CategoryController::class,'vie
 
 Route::post('/insertProduct/store', [App\Http\Controllers\ProductController::class,'store'])->name('addProduct');
 Route::get('/viewProducts', [App\Http\Controllers\ProductController::class,'view'])->name('viewProduct');
+
+Route::post('/products', [App\Http\Controllers\ProductController::class, 'searchProduct'])->name('search.product');
 
 Auth::routes();
 

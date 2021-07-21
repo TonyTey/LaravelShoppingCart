@@ -33,4 +33,21 @@ class ProductController extends Controller
 
         Return view('showProduct')->with('products', $product);
     }
+
+    public function viewAll() {
+        $product=Product::all();  //apply SQL select * from products
+
+        Return view('products')->with('products', $product);
+    }
+
+    public function searchProduct() {
+        $r=request();
+        $keyword=$r->keyword;
+        $product=DB::table('products')
+        ->where('products.name', 'like', '%'.$keyword.'%')
+        ->orwhere('products.description', 'like', '%'.$keyword.'%') //select * from products where name like '%keyword%'
+        ->get();
+
+        Return view('products')->with('products', $product);
+    }
 }
