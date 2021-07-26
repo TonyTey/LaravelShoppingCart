@@ -1,7 +1,10 @@
 @extends('layout')
 @section('content')
-
-
+@if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{Session::get('success')}}
+    </div>
+@endif
 <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -34,7 +37,7 @@
                             <td>{{$product->quantity}}</td>
                             <td>{{$product->categoryID}}</td>
                             <td>
-                                <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">Edit</i></a>
+                                <a href="{{ route('editProduct', ['id'=>$product->id]) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">Edit</i></a>
                                 <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">Delete</i></a>
                             </td>
                         </tr>  

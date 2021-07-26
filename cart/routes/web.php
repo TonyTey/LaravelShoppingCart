@@ -36,6 +36,9 @@ Route::get('/viewProducts', [App\Http\Controllers\ProductController::class,'view
 
 Route::post('/products', [App\Http\Controllers\ProductController::class, 'searchProduct'])->name('search.product');
 
+Route::get('/editProduct/{id}', [App\Http\Controllers\ProductController::class,'edit'])->name('editProduct');
+Route::post('/updateProduct', [App\Http\Controllers\ProductController::class,'update'])->name('updateProduct');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

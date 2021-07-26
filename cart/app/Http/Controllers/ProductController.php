@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use DB;
 use App\Models\Product;
+use Session;
 
 class ProductController extends Controller
 {
@@ -24,7 +25,7 @@ class ProductController extends Controller
             'categoryID'=>$r->categoryID,
 
         ]);
-
+        Session::flash('success', "Product added!");
         Return redirect()->route('viewProduct');
     }
 
@@ -49,5 +50,34 @@ class ProductController extends Controller
         ->get();
 
         Return view('products')->with('products', $product);
+    }
+
+    public function edit($id) {
+
+        //select * from products where id='$id'
+        $products=Product::all()->where('id', $id);
+
+        Return view('editProduct')->with('products', $products);
+    }
+
+    public function update() {
+        $r=request();
+        $products=Product::find($r->id); //retrieve the record based on id
+        if($r->file('product-image')!= '') {
+            $image=$r->file('product-image');
+            $image->move('images', $image->getClientOriginalName()); //images is the location
+            $imageName=$image->getClientOriginalName(); // upload the image 
+            $products->image=$imageName; // update product table record
+        }
+
+        $products->name=$r->productName;
+        $products->description=$r->description;
+        $products->price=$r->price;
+        $products->quantity=$r->quantity;
+        $products->categoryID=$r->categoryID;
+        $products->save();
+        Session::flash('success', "Product updated successful");
+
+        Return redirect()->route('viewProduct');
     }
 }
