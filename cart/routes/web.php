@@ -25,7 +25,7 @@ Route::get('/insertCategory', function () {
 });
 
 Route::get('/insertProduct', function() {
-    return view("insertProduct");
+    return view("insertProduct", ['categoryID'=>App\Models\Category::all()]);
 });
 
 Route::post('/insertCategory/store', [App\Http\Controllers\CategoryController::class,'store'])->name('addCategory');
@@ -38,6 +38,8 @@ Route::post('/products', [App\Http\Controllers\ProductController::class, 'search
 
 Route::get('/editProduct/{id}', [App\Http\Controllers\ProductController::class,'edit'])->name('editProduct');
 Route::post('/updateProduct', [App\Http\Controllers\ProductController::class,'update'])->name('updateProduct');
+
+Route::get('/viewDetail/{id}', [App\Http\Controllers\ProductController::class,'productDetail'])->name('viewDetail');
 
 Auth::routes();
 

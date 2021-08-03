@@ -7,7 +7,9 @@
             <div class="card-body">
                 <h5 class="card-title"> {{$product->name}}</h5>
                 <p class="card-text">{{$product->description}}</p>
+                <a href="{{ route('viewDetail', ['id'=>$product->id]) }}">
                 <img src="{{asset('images/')}}/{{$product->image}}" class="img-fluid" alt="">
+                </a>
                 <div class="class-heading">RM {{$product->price}}</div>
                 <button class="btn btn-danger brn-xs">Add to cart</button>
             </div>

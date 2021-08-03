@@ -25,4 +25,9 @@ class CategoryController extends Controller
         Return view('showCategory')->with('categories',$category);
     }
 
+    public function index() {
+        $category=Category::all();  //apply SQL select * from categories
+        Return view('insertCategory')->with('categories',$category);
+    }
+
 }
