@@ -42,6 +42,13 @@ Route::post('/updateProduct', [App\Http\Controllers\ProductController::class,'up
 Route::get('/viewDetail/{id}', [App\Http\Controllers\ProductController::class,'productDetail'])->name('viewDetail');
 
 Route::post('/addCart', [App\Http\Controllers\CartController::class,'add'])->name('add.to.cart');
+Route::get('/myCart', [App\Http\Controllers\CartController::class,'showMyCart'])->name('myCart');
+
+Route::get('/deleteItem/{id}', [App\Http\Controllers\CartController::class,'delete'])->name('delete.Item');
+
+Route::post('\checkout', [App\Http\Controllers\PaymentController::class, 'paymentPost'])->name('payment.post');
+
+Route::get('/myOrder', [App\Http\Controllers\PaymentController::class,'showOrder'])->name('myOrder');
 
 Auth::routes();
 

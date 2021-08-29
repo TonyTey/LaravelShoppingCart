@@ -31,8 +31,8 @@ class CartController extends Controller
 
     public function showMyCart() {
         $carts=DB::table('my_carts')
-        ->leftjoin('product','products.id','=','my_carts.productID')
-        ->select('my_carts.quantity as cartQty','my_carts.id as cid','product.*')
+        ->leftjoin('products','products.id','=','my_carts.productID')
+        ->select('my_carts.quantity as cartQty','my_carts.id as cid','products.*')
         ->where('my_carts.orderID','=','')//the item haven't make payment
         ->where('my_carts.userID','=',Auth::id())
         ->get();
@@ -42,5 +42,12 @@ class CartController extends Controller
         my_carts.userID='Auth::id()'*/
 
         Return view('myCart')->with('carts', $carts);
+    }
+
+    public function delete($id) {
+        $delete=myCart::find($id);
+        $delete->delete();      //run SQL delete from my_Cart where id=$id
+
+        Return redirect()->route('myCart');
     }
 }
